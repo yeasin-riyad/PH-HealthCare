@@ -6,15 +6,17 @@ import { prisma } from "../lib/prisma";
 import { catchAsync } from "../utils/catchAsync";
 import { jwtUtils } from "../utils/jwt";
 
+export interface RequestUser {
+	email: string;
+	name: string;
+	userId: string;
+	role: Role;
+}
+
 declare global {
 	namespace Express {
 		interface Request {
-			user?: {
-				email: string;
-				name: string;
-				userId: string;
-				role: Role;
-			};
+			user?: RequestUser;
 		}
 	}
 }
@@ -35,7 +37,7 @@ export const auth = (...requiredRoles: Role[]) => {
 			);
 		}
 
-		const verifiedToken = jwtUtils.verifyToken(token, config.jwt_access_secret);
+		const verifiedToken = jwtUtils.verifyToken(token, config.jwt_access_secret!);
 
 		if (!verifiedToken.success) {
 			throw new Error(verifiedToken.error);
