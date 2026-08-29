@@ -323,13 +323,13 @@ const refreshToken = async (token: string) => {
 
 	const accessToken = jwtUtils.createToken(
 		jwtPayload,
-		config.jwt_access_secret,
+		config.jwt_access_secret as string,
 		config.jwt_access_expires_in as SignOptions,
 	);
 
 	const refreshToken = jwtUtils.createToken(
 		jwtPayload,
-		config.jwt_refresh_secret,
+		config.jwt_refresh_secret || "",
 		config.jwt_refresh_expires_in as SignOptions,
 	);
 
