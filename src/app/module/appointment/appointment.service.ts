@@ -2,10 +2,12 @@ import {
 	AppointmentStatus,
 	PaymentStatus,
 } from "../../../generated/prisma/enums";
+import httpStatus from "http-status";
 import config from "../../config";
 import { getBkashIdToken } from "../../lib/bkash";
 import { prisma } from "../../lib/prisma";
 import type { RequestUser } from "../../middleware/checkAuth";
+import { AppError } from "../../utils/AppError";
 
 const bookAppointment = async (payload: any, user: RequestUser) => {
 	const transactionResult = await prisma.$transaction(async (tx) => {
