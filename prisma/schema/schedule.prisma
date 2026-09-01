@@ -1,10 +1,10 @@
 model Schedule {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    startDateTime DateTime 
-    endDateTime DateTime
+  startDateTime DateTime
+  endDateTime   DateTime
 
-     totalSlots     Int
+  totalSlots     Int
   availableSlots Int
   meetingLink    String
 
